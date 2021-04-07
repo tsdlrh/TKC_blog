@@ -1,0 +1,397 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="_fragment :: head(~{::title})">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>博客详情</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.css">
+  <link rel="stylesheet" href="../static/css/typo.css">
+  <link rel="stylesheet" href="../static/css/animate.css">
+  <link rel="stylesheet" href="../static/lib/prism/prism.css">
+  <link rel="stylesheet" href="../static/lib/tocbot/tocbot.css">
+  <link rel="stylesheet" href="../static/css/me.css">
+
+
+</head>
+<body>
+<!--鼠标移动特效-->
+<div class="starfield">
+  <div class="static"></div>
+  <div class="moving-1"></div>
+  <div class="moving-2"></div>
+  <div class="moving-3"></div>
+</div>
+
+<!--导航-->
+<nav th:replace="_fragment :: menu(1)"  class="ui inverted attached segment m-padded-tb-mini m-shadow-small" >
+  <div class="ui container">
+    <div class="ui inverted secondary stackable menu">
+      <h2 class="ui teal header item">Blog</h2>
+      <a href="#" class="active m-item item m-mobile-hide"><i class="home icon"></i>首页</a>
+      <a href="#" class="m-item item m-mobile-hide"><i class="idea icon"></i>分类</a>
+      <a href="#" class="m-item item m-mobile-hide"><i class="tags icon"></i>标签</a>
+      <a href="#" class="m-item item m-mobile-hide"><i class="clone icon"></i>归档</a>
+      <a href="#" class="m-item item m-mobile-hide"><i class="info icon"></i>关于我</a>
+      <div class="right m-item item m-mobile-hide">
+        <div class="ui icon inverted transparent input m-margin-tb-tiny">
+          <input type="text" placeholder="Search....">
+          <i class="search link icon"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+  <a href="#" class="ui menu toggle black icon button m-right-top m-mobile-show">
+    <i class="sidebar icon"></i>
+  </a>
+</nav>
+
+<!--中间内容-->
+<div id="waypoint" class="m-container-small m-padded-tb-big animated fadeIn">
+  <div class="ui container">
+    <div class="ui top attached segment">
+      <div class="ui horizontal link list">
+        <div class="item">
+          <img src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimg.kttpdq.com%2Fpic%2F8%2F4959%2F3473784869a06b1b.jpg&refer=http%3A%2F%2Fimg.kttpdq.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1619425293&t=0e27ae2cacbe2736584e6d9159e94fad" th:src="@{${blog.user.avatar}}"  alt="" class="ui avatar image">
+          <div class="content"><a href="#" class="header" th:text="${blog.user.nickname}">田开聪</a></div>
+        </div>
+        <div class="item">
+          <i class="calendar icon"></i> <span th:text="${#dates.format(blog.updateTime,'yyyy-MM-dd')}">2021-04-07</span>
+        </div>
+        <div class="item">
+          <i class="eye icon"></i> <span th:text="${blog.views}">123</span>
+        </div>
+      </div>
+    </div>
+    <div class="ui attached segment">
+      <!--图片区域-->
+      <img src="https://unsplash.it/200/200?image=1001" th:src="@{${blog.firstPicture}}" alt="" class="ui centered aligned rounded image  animate__animated animate__bounce">
+    </div>
+    <div class="ui  attached padded segment">
+      <!--内容-->
+
+      <h2 class="ui center aligned header" th:text="${blog.title}">博客标题</h2>
+      <br>
+      <!--中间主要内容部分-->
+      <div id="content" class="typo  typo-selection js-toc-content m-padded-lr-responsive m-padded-tb-large  animate__animated animate__fadeIn" th:utext="${blog.content}">
+
+        <h2 id="section1">一、关于 <i class="serif">Typo.css</i></h2>
+
+        <pre><code class="language-css">p { color: red }</code></pre>
+
+        <pre><code class="language-css">p { color: red }</code></pre>
+
+        <p><i class="serif">Typo.css</i> 的目的是，在一致化浏览器排版效果的同时，构建最适合中文阅读的网页排版。</p>
+        <h4 >现状和如何去做：</h4>
+
+        <p class="typo-first">排版是一个麻烦的问题 <sup><a href="#appendix1"># 附录一</a></sup>，需要精心设计，而这个设计却是常被视觉设计师所忽略的。前端工程师更常看到这样的问题，但不便变更。因为在多个 OS 中的不同浏览器渲染不同，改动需要多的时间做回归测试，所以改变变得更困难。而像我们一般使用的
+          Yahoo、Eric Meyer 和 Alice base.css 中采用的 Reset 都没有很好地考虑中文排版。<i class="serif">Typo.css</i> 要做的就是解决中文排版的问题。</p>
+
+        <p><strong><i class="serif">Typo.css</i> 测试于如下平台：</strong></p>
+        <table class="ui table" summary="Typo.css 的测试平台列表">
+          <thead>
+          <tr>
+            <th>OS/浏览器</th>
+            <th>Firefox</th>
+            <th>Chrome</th>
+            <th>Safari</th>
+            <th>Opera</th>
+            <th>IE9</th>
+            <th>IE8</th>
+            <th>IE7</th>
+            <th>IE6</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td>OS X</td>
+            <td>✔</td>
+            <td>✔</td>
+            <td>✔</td>
+            <td>✔</td>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>Win 7</td>
+            <td>✔</td>
+            <td>✔</td>
+            <td>✔</td>
+            <td>✔</td>
+            <td>✔</td>
+            <td>✔</td>
+            <td>✔</td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>Win XP</td>
+            <td>✔</td>
+            <td>✔</td>
+            <td>✔</td>
+            <td>✔</td>
+            <td>-</td>
+            <td>✔</td>
+            <td>✔</td>
+            <td>✔</td>
+          </tr>
+          <tr>
+            <td>Ubuntu</td>
+            <td>✔</td>
+            <td>✔</td>
+            <td>-</td>
+            <td>✔</td>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
+          </tr>
+          </tbody>
+        </table>
+
+        <h4>中文排版的重点和难点</h4>
+
+        <p>在中文排版中，HTML4 的很多标准在语义在都有照顾到。但从视觉效果上，却很难利用单独的 CSS 来实现，像<abbr title="在文字下多加一个点">着重号</abbr>（例：这里<em class="typo-em">强调一下</em>）。在 HTML4 中，专名号标签（<code>&lt;u&gt;</code>）已经被放弃，而
+          HTML5 被<a href="http://html5doctor.com/u-element/">重新提起</a>。<i class="serif">Typo.css</i> 也根据实际情况提供相应的方案。我们重要要注意的两点是：</p>
+        <ol>
+          <li>语义：语义对应的用法和样式是否与中文排版一致</li>
+          <li>表现：在各浏览器中的字体、大小和缩放是否如排版预期</li>
+        </ol>
+        <p>对于这些，<i class="serif">Typo.css</i> 排版项目的中文偏重注意点，都添加在附录中，详见：</p>
+        <blockquote>
+          <b>附录一</b>：<a href="#appendix1"><i class="serif">Typo.css</i> 排版偏重点</a>
+        </blockquote>
+
+        <p>目前已有像百姓网等全面使用 <i class="serif">Typo.css</i> 的项目，测试平台的覆盖，特别是在<abbr title="手机、平板电脑等移动平台">移动端</abbr>上还没有覆盖完主流平台，希望有能力的同学能加入测试行列，或者加入到 <i class="serif">Typo.css</i>
+          的开发。加入方法：<a href="https://github.com/sofish/Typo.css">参与 <i class="serif">Typo.css</i> 开发</a>。如有批评、建议和意见，也随时欢迎给在 Github 直接提 <a
+                  href="https://github.com/sofish/Typo.css/issues">issues</a>，或给<abbr title="Sofish Lin, author of Typo.css"
+                                                                                      role="author">我</abbr>发<a
+                  href="mailto:sofish@icloud.com">邮件</a>。</p>
+
+
+        <h2 id="section2">二、排版实例：</h2>
+
+        <p>提供2个排版实例，第一个中文实例来自于来自于<cite class="typo-unique">张燕婴</cite>的《论语》，由于古文排版涉及到的元素比较多，所以采用《论语》中《学而》的第一篇作为排版实例介绍；第2个来自到经典的
+          Lorem Ipsum，并加入了一些代码和列表等比较具有代表性的排版元素。</p>
+
+
+        </tr>
+        </tbody>
+        </table>
+
+
+      </div>
+
+      <!--标签-->
+      <div class="m-padded-lr-responsive">
+        <div class="ui basic teal left pointing label" th:each="tag : ${blog.tags}" th:text="${tag.name}">方法论</div>
+      </div>
+
+
+      <!--赞赏-->
+      <div th:if="${blog.appreciation}">
+        <div class="ui center aligned basic segment">
+         <!--赞赏按钮-->
+          <button id="payButton" class="ui orange basic circular button">赞赏</button>
+        </div>
+        <div class="ui payQR flowing popup transition hidden">
+          <div class="ui orange basic label">
+            <div class="ui images" style="font-size: inherit !important;">
+              <div class="image">
+                <img src="../static/image/alipay.jpg" th:src="@{/image/alipay.jpg}" alt="" class="ui rounded bordered image" style="width: 120px">
+                <div>支付宝</div>
+              </div>
+              <div class="image">
+                <img src="../static/image/weipay.jpg" th:src="@{/image/weipay.jpg}" alt="" class="ui rounded bordered image" style="width: 120px">
+                <div>微信</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="ui attached positive message" th:if="${blog.shareStatement}">
+      <!--博客信息-->
+      <div class="ui middle aligned grid">
+        <div class="eleven wide column">
+          <ui class="list">
+            <li>作者：<span th:text="${blog.user.nickname}">田开聪</span><a href="#" th:href="@{/about}" target="_blank">（联系作者）</a></li>
+            <li>发表时间：<span th:text="${#dates.format(blog.updateTime,'yyyy-MM-dd HH:mm')}">2021-04-02 09:08</span></li>
+            <li>版权声明：自由转载-非商用-非衍生-保持署名（创意共享3.0许可证）</li>
+            <li>公众号转载：请在文末添加作者公众号二维码</li>
+          </ui>
+        </div>
+        <div class="five wide column">
+          <img src="../static/image/wechat.jpg" th:src="@{/image/wechat.jpg}" alt="" class="ui right floated rounded bordered image" style="width: 110px">
+        </div>
+      </div>
+    </div>
+    <div  class="ui bottom attached segment" th:if="${blog.commentabled}">
+      <!--留言区域列表-->
+
+    </div>
+  </div>
+</div>
+
+<div id="toolbar" class="m-padded m-fixed m-right-bottom" style="display: none">
+  <div class="ui vertical icon buttons ">
+    <button type="button" class="ui toc teal button" >目录</button>
+    <button class="ui wechat icon button"><i class="weixin icon"></i></button>
+    <div id="toTop-button" class="ui icon button" ><i class="chevron up icon"></i></div>
+  </div>
+</div>
+
+<div class="ui toc-container flowing popup transition hidden" style="width: 250px!important;">
+  <ol class="js-toc">
+
+  </ol>
+</div>
+
+<div id="qrcode" class="ui wechat-qr flowing popup transition hidden "style="width: 130px !important;">
+  <!--<img src="./static/image/wechat.jpg" alt="" class="ui rounded image" style="width: 120px !important;">-->
+</div>
+
+
+
+<br>
+<br>
+<!--底部footer-->
+<footer th:replace="admin/_fragment :: footer" class="ui inverted vertical segment m-padded-tb-massive">
+  <div class="ui center aligned container">
+    <div class="ui inverted divided stackable grid">
+      <div class="three wide column">
+        <div class="ui inverted link list">
+          <div class="item">
+            <img src="../static/image/wechat.jpg" class="ui rounded image" alt="" style="width: 110px">
+          </div>
+        </div>
+      </div>
+      <div class="three wide column">
+        <h4 class="ui inverted header m-text-thin m-text-spaced " >最新博客</h4>
+        <div class="ui inverted link list">
+          <a href="#" class="item m-text-thin">最新博客1</a>
+          <a href="#" class="item m-text-thin">最新博客2</a>
+          <a href="#" class="item m-text-thin">最新博客3</a>
+        </div>
+      </div>
+      <div class="three wide column">
+        <h4 class="ui inverted header m-text-thin m-text-spaced ">联系我</h4>
+        <div class="ui inverted link list">
+          <a href="#" class="item m-text-thin">Email：2541002015@qq.com</a>
+          <a href="#" class="item m-text-thin">QQ：2541002015</a>
+        </div>
+      </div>
+      <div class="seven wide column">
+        <h4 class="ui inverted header m-text-thin m-text-spaced ">Blog</h4>
+        <p class="m-text-thin m-text-spaced m-opacity-mini">这是我的个人博客、会分享关于编程、写作、思考相关的任何内容，希望可以给来到这儿的人有所帮助...</p>
+      </div>
+    </div>
+    <div class="ui inverted section divider"></div>
+    <p class="m-text-thin m-text-spaced m-opacity-tiny">Copyright © 2021 - 2021 Tiankaicong Designed by Tiankaicong</p>
+  </div>
+
+</footer>
+
+<!--/*/<th:block th:replace="_fragment :: script">/*/-->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/jquery.scrollto@2.1.2/jquery.scrollTo.min.js"></script>
+
+<script src="../static/lib/prism/prism.js"></script>
+<script src="../static/lib/tocbot/tocbot.min.js"></script>
+<script src="../static/lib/qrcode/qrcode.min.js"></script>
+<script src="../static/lib/waypoints/jquery.waypoints.min.js"></script>
+<script src="../static/js/bubbleCursor.js"></script>
+
+<!--/*/</th:block>/*/-->
+
+
+<script th:inline="javascript">
+
+new bubbleCursor();
+    var btnList = document.getElementsByTagName('input');
+    var name = 2;
+    for(var i = 0;i<btnList.length;i++){
+      btnList[i].onclick = getValue();
+     }
+
+     function getValue(){
+     var name = 2;
+     return function(){
+     this.value = "Like" + (num++)
+     }
+     }
+
+    $('.menu.toggle').click(function () {
+      $('.m-item').toggleClass('m-mobile-hide');
+    });
+
+   function add(){
+    var x = document.getElementById("text");
+    var a = x.value;
+    a++;
+    x.value=a;
+    }
+
+
+    $('#payButton').popup({
+      popup : $('.payQR.popup'),
+      on : 'click',
+      position: 'bottom center'
+    });
+
+    tocbot.init({
+      // Where to render the table of contents.
+      tocSelector: '.js-toc',
+      // Where to grab the headings to build the table of contents.
+      contentSelector: '.js-toc-content',
+      // Which headings to grab inside of the contentSelector element.
+      headingSelector: 'h1, h2, h3',
+    });
+
+    $('.toc.button').popup({
+      popup : $('.toc-container.popup'),
+      on : 'click',
+      position: 'left center'
+    });
+
+    $('.wechat').popup({
+      popup : $('.wechat-qr'),
+      position: 'left center'
+    });
+
+    var serurl = /*[[#{blog.serurl}]]*/"127.0.0.1:8080";
+    var url = /*[[@{/blog/{id}(id=${blog.id})}]]*/"";
+    var qrcode = new QRCode("qrcode", {
+      text: serurl+url,
+      width: 110,
+      height: 110,
+      colorDark : "#000000",
+      colorLight : "#ffffff",
+      correctLevel : QRCode.CorrectLevel.H
+    });
+
+    $('#toTop-button').click(function () {
+      $(window).scrollTo(0,500);
+    });
+
+
+    var waypoint = new Waypoint({
+      element: document.getElementById('waypoint'),
+      handler: function(direction) {
+        if (direction == 'down') {
+          $('#toolbar').show(100);
+        } else {
+          $('#toolbar').hide(500);
+        }
+        console.log('Scrolled to waypoint!  ' + direction);
+      }
+    });
+
+
+
+  </script>
+</body>
+</html>
